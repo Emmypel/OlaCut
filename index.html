@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ola's Cutz Barbershop - Book Your Appointment Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <div class="logo">
+                    <i class="fas fa-cut"></i>
+                    <span>Ola's Cutz</span>
+                </div>
+                <div class="nav-menu" id="navMenu">
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#gallery" class="nav-link">Gallery</a>
+                    <a href="#booking" class="nav-link">Book Now</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <button class="mobile-toggle" id="mobileToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Your Style, Our Expertise</h1>
+                <p class="hero-subtitle">Professional barbering services in Lagos & Ilorin</p>
+                <a href="#booking" class="btn btn-primary">Book Appointment Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <p class="section-subtitle">Premium grooming at affordable prices</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-scissors"></i>
+                    </div>
+                    <h3>Haircut</h3>
+                    <p class="service-duration"><i class="far fa-clock"></i> 30 minutes</p>
+                    <p class="service-price">₦2,000</p>
+                    <p class="service-desc">Classic and modern haircuts tailored to your style</p>
+                </div>
+                <div class="service-card featured">
+                    <div class="popular-badge">Popular</div>
+                    <div class="service-icon">
+                        <i class="fas fa-cut"></i>
+                    </div>
+                    <h3>Haircut & Beard</h3>
+                    <p class="service-duration"><i class="far fa-clock"></i> 40 minutes</p>
+                    <p class="service-price">₦3,000</p>
+                    <p class="service-desc">Complete grooming package for the modern gentleman</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>Kids Haircut</h3>
+                    <p class="service-duration"><i class="far fa-clock"></i> 40 minutes</p>
+                    <p class="service-price">₦2,500</p>
+                    <p class="service-desc">Gentle and fun haircuts for the little ones</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Shaving</h3>
+                    <p class="service-duration"><i class="far fa-clock"></i> 15 minutes</p>
+                    <p class="service-price">₦1,000</p>
+                    <p class="service-desc">Traditional hot towel shave experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <h2 class="section-title">Our Work</h2>
+            <p class="section-subtitle">Get inspired by our latest styles</p>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- Gallery images will be generated dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <img src="" alt="Gallery Image" id="lightboxImg">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+
+    <!-- Booking Section -->
+    <section class="booking" id="booking">
+        <div class="container">
+            <h2 class="section-title">Book Your Appointment</h2>
+            <p class="section-subtitle">Easy 6-step booking process</p>
+            
+            <div class="booking-container">
+                <!-- Progress Indicator -->
+                <div class="progress-bar">
+                    <div class="progress-step active" data-step="1">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Service</div>
+                    </div>
+                    <div class="progress-step" data-step="2">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Location</div>
+                    </div>
+                    <div class="progress-step" data-step="3">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Date</div>
+                    </div>
+                    <div class="progress-step" data-step="4">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Time</div>
+                    </div>
+                    <div class="progress-step" data-step="5">
+                        <div class="step-number">5</div>
+                        <div class="step-label">Details</div>
+                    </div>
+                    <div class="progress-step" data-step="6">
+                        <div class="step-number">6</div>
+                        <div class="step-label">Confirm</div>
+                    </div>
+                </div>
+
+                <!-- Booking Form -->
+                <div class="booking-form">
+                    <!-- Step 1: Select Service -->
+                    <div class="form-step active" data-step="1">
+                        <h3>Select Service</h3>
+                        <div class="service-options">
+                            <label class="service-option">
+                                <input type="radio" name="service" value="Haircut|30|2000">
+                                <div class="option-content">
+                                    <i class="fas fa-scissors"></i>
+                                    <h4>Haircut</h4>
+                                    <p>30 min - ₦2,000</p>
+                                </div>
+                            </label>
+                            <label class="service-option">
+                                <input type="radio" name="service" value="Haircut & Beard|40|3000">
+                                <div class="option-content">
+                                    <i class="fas fa-cut"></i>
+                                    <h4>Haircut & Beard</h4>
+                                    <p>40 min - ₦3,000</p>
+                                </div>
+                            </label>
+                            <label class="service-option">
+                                <input type="radio" name="service" value="Kids Haircut|40|2500">
+                                <div class="option-content">
+                                    <i class="fas fa-child"></i>
+                                    <h4>Kids Haircut</h4>
+                                    <p>40 min - ₦2,500</p>
+                                </div>
+                            </label>
+                            <label class="service-option">
+                                <input type="radio" name="service" value="Shaving|15|1000">
+                                <div class="option-content">
+                                    <i class="fas fa-star"></i>
+                                    <h4>Shaving</h4>
+                                    <p>15 min - ₦1,000</p>
+                                </div>
+                            </label>
+                        </div>
+                        <button class="btn btn-primary" onclick="nextStep(2)">Next</button>
+                    </div>
+
+                    <!-- Step 2: Select Location -->
+                    <div class="form-step" data-step="2">
+                        <h3>Choose Location</h3>
+                        <div class="location-options">
+                            <label class="location-option">
+                                <input type="radio" name="location" value="Lagos|Akintunde Str, MTN Badagry Expressway, Lagos">
+                                <div class="option-content">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h4>Lagos</h4>
+                                    <p>Akintunde Str, MTN Badagry Expressway</p>
+                                </div>
+                            </label>
+                            <label class="location-option">
+                                <input type="radio" name="location" value="Ilorin|Oke Andi, Ilorin, Kwara State">
+                                <div class="option-content">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <h4>Ilorin</h4>
+                                    <p>Oke Andi, Ilorin, Kwara State</p>
+                                </div>
+                            </label>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-secondary" onclick="prevStep(1)">Back</button>
+                            <button class="btn btn-primary" onclick="nextStep(3)">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Select Date -->
+                    <div class="form-step" data-step="3">
+                        <h3>Pick a Date</h3>
+                        <div class="calendar-container">
+                            <div class="calendar-header">
+                                <button class="calendar-nav" id="prevMonth">
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
+                                <h4 id="currentMonth"></h4>
+                                <button class="calendar-nav" id="nextMonth">
+                                    <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
+                            <div class="calendar-days">
+                                <div class="day-name">Sun</div>
+                                <div class="day-name">Mon</div>
+                                <div class="day-name">Tue</div>
+                                <div class="day-name">Wed</div>
+                                <div class="day-name">Thu</div>
+                                <div class="day-name">Fri</div>
+                                <div class="day-name">Sat</div>
+                            </div>
+                            <div class="calendar-dates" id="calendarDates"></div>
+                        </div>
+                        <input type="hidden" id="selectedDate" name="date">
+                        <div class="button-group">
+                            <button class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+                            <button class="btn btn-primary" onclick="nextStep(4)">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Select Time -->
+                    <div class="form-step" data-step="4">
+                        <h3>Choose Time Slot</h3>
+                        <p class="time-info">Available times for <span id="selectedDateDisplay"></span></p>
+                        <div class="time-slots" id="timeSlots">
+                            <!-- Time slots will be generated dynamically -->
+                        </div>
+                        <input type="hidden" id="selectedTime" name="time">
+                        <div class="button-group">
+                            <button class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+                            <button class="btn btn-primary" onclick="nextStep(5)">Next</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Enter Details -->
+                    <div class="form-step" data-step="5">
+                        <h3>Your Details</h3>
+                        <div class="form-group">
+                            <label for="customerName">
+                                <i class="fas fa-user"></i> Full Name *
+                            </label>
+                            <input type="text" id="customerName" name="name" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerPhone">
+                                <i class="fas fa-phone"></i> Phone Number *
+                            </label>
+                            <input type="tel" id="customerPhone" name="phone" required placeholder="080XXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerEmail">
+                                <i class="fas fa-envelope"></i> Email (Optional)
+                            </label>
+                            <input type="email" id="customerEmail" name="email" placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="customerNotes">
+                                <i class="fas fa-comment"></i> Special Requests (Optional)
+                            </label>
+                            <textarea id="customerNotes" name="notes" rows="3" placeholder="Any special instructions or requests?"></textarea>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-secondary" onclick="prevStep(4)">Back</button>
+                            <button class="btn btn-primary" onclick="nextStep(6)">Review Booking</button>
+                        </div>
+                    </div>
+
+                    <!-- Step 6: Confirm Booking -->
+                    <div class="form-step" data-step="6">
+                        <h3>Confirm Your Booking</h3>
+                        <div class="booking-summary">
+                            <div class="summary-item">
+                                <i class="fas fa-scissors"></i>
+                                <div>
+                                    <strong>Service</strong>
+                                    <p id="summaryService"></p>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>
+                                    <strong>Location</strong>
+                                    <p id="summaryLocation"></p>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <i class="fas fa-calendar"></i>
+                                <div>
+                                    <strong>Date</strong>
+                                    <p id="summaryDate"></p>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <strong>Time</strong>
+                                    <p id="summaryTime"></p>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <i class="fas fa-user"></i>
+                                <div>
+                                    <strong>Name</strong>
+                                    <p id="summaryName"></p>
+                                </div>
+                            </div>
+                            <div class="summary-item">
+                                <i class="fas fa-phone"></i>
+                                <div>
+                                    <strong>Phone</strong>
+                                    <p id="summaryPhone"></p>
+                                </div>
+                            </div>
+                            <div class="summary-total">
+                                <strong>Total Price:</strong>
+                                <span id="summaryPrice"></span>
+                            </div>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn btn-secondary" onclick="prevStep(5)">Back</button>
+                            <button class="btn btn-success" onclick="confirmBooking()">
+                                <i class="fas fa-check"></i> Confirm Booking
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmation Modal -->
+    <div class="modal" id="confirmationModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-check-circle"></i>
+                <h2>Booking Confirmed!</h2>
+            </div>
+            <div class="modal-body">
+                <p class="booking-reference">Booking Reference: <strong id="bookingRef"></strong></p>
+                <div class="confirmation-details">
+                    <h3>Appointment Details</h3>
+                    <div class="detail-row">
+                        <span>Service:</span>
+                        <strong id="confirmService"></strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Date:</span>
+                        <strong id="confirmDate"></strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Time:</span>
+                        <strong id="confirmTime"></strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Location:</span>
+                        <strong id="confirmLocation"></strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Address:</span>
+                        <strong id="confirmAddress"></strong>
+                    </div>
+                    <div class="detail-row">
+                        <span>Price:</span>
+                        <strong id="confirmPrice"></strong>
+                    </div>
+                </div>
+                <div class="whatsapp-notice">
+                    <i class="fab fa-whatsapp"></i>
+                    <p>A confirmation has been sent via WhatsApp. We'll see you soon!</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" onclick="closeModal()">Done</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <h2 class="section-title">Visit Us</h2>
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Lagos</h3>
+                    <p>Akintunde Str, MTN Badagry Expressway, Lagos</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h3>Ilorin</h3>
+                    <p>Oke Andi, Ilorin, Kwara State</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-phone"></i>
+                    <h3>Call Us</h3>
+                    <p>+234 701 603 7881</p>
+                </div>
+                <div class="contact-card">
+                    <i class="fas fa-clock"></i>
+                    <h3>Working Hours</h3>
+                    <p>Mon - Sat: 9AM - 8PM<br>Sunday: Closed</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3><i class="fas fa-cut"></i> Ola's Cutz</h3>
+                    <p>Your premier barbershop in Lagos and Ilorin. Professional service, exceptional results.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#home">Home</a>
+                    <a href="#services">Services</a>
+                    <a href="#gallery">Gallery</a>
+                    <a href="#booking">Book Now</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Ola's Cutz Barbershop. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="booking.js"></script>
+    <script src="gallery.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
