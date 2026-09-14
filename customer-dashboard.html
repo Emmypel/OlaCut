@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ola's Cutz - My Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            color: #333;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .header-left i {
+            font-size: 2rem;
+            color: #D4AF37;
+        }
+
+        .header-left h1 {
+            font-size: 1.5rem;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+        .logout-btn {
+            background: #D4AF37;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #B8941E;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-btn {
+            padding: 12px 24px;
+            border: 2px solid #ddd;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #666;
+        }
+
+        .tab-btn.active {
+            background: #D4AF37;
+            color: white;
+            border-color: #D4AF37;
+        }
+
+        .tab-btn:hover {
+            border-color: #D4AF37;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Booking Section */
+        .booking-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-section h2 {
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1a1a1a;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #D4AF37;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .service-card {
+            border: 2px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .service-card:hover {
+            border-color: #D4AF37;
+            transform: translateY(-5px);
+        }
+
+        .service-card.selected {
+            border-color: #D4AF37;
+            background: rgba(212, 175, 55, 0.1);
+        }
+
+        .service-card h4 {
+            color: #1a1a1a;
+            margin-bottom: 5px;
+        }
+
+        .service-card p {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .service-card .price {
+            color: #D4AF37;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .book-btn {
+            background: #D4AF37;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .book-btn:hover {
+            background: #B8941E;
+            transform: translateY(-2px);
+        }
+
+        .book-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Bookings List */
+        .bookings-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .booking-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #D4AF37;
+        }
+
+        .booking-card h4 {
+            color: #1a1a1a;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .booking-ref {
+            background: #f0f0f0;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .booking-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .booking-detail strong {
+            color: #1a1a1a;
+        }
+
+        .booking-detail span {
+            color: #666;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .status-pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-confirmed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state i {
+            font-size: 4rem;
+            color: #ddd;
+            margin-bottom: 20px;
+        }
+
+        .cancel-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .cancel-btn:hover {
+            background: #dc2626;
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .success {
+            background: #efe;
+            color: #3c3;
+            border-left: 4px solid #3c3;
+        }
+
+        .error {
+            background: #fee;
+            color: #c33;
+            border-left: 4px solid #c33;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+            }
+
+            .tabs {
+                flex-wrap: wrap;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .bookings-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-left">
+            <i class="fas fa-cut"></i>
+            <h1>Ola's Cutz</h1>
+        </div>
+        <div class="header-right">
+            <div class="user-info">
+                <i class="fas fa-user-circle"></i>
+                <span id="customerName">Customer</span>
+            </div>
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Tabs -->
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('book')">
+                <i class="fas fa-calendar-plus"></i> Book Appointment
+            </button>
+            <button class="tab-btn" onclick="switchTab('bookings')">
+                <i class="fas fa-calendar-check"></i> My Bookings
+            </button>
+            <button class="tab-btn" onclick="switchTab('profile')">
+                <i class="fas fa-user"></i> My Profile
+            </button>
+        </div>
+
+        <!-- Book Appointment Tab -->
+        <div id="book" class="tab-content active">
+            <div class="booking-section">
+                <h2>Book Your Appointment</h2>
+                <div id="bookMessage"></div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="location">Location *</label>
+                        <select id="location" required>
+                            <option value="">Select a location</option>
+                            <option value="Lagos|Akintunde Str, MTN Badagry Expressway, Lagos">Lagos</option>
+                            <option value="Ilorin|Oke Andi, Ilorin, Kwara State">Ilorin</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="date">Date *</label>
+                        <input type="date" id="date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="time">Time *</label>
+                        <select id="time" required>
+                            <option value="">Select a time</option>
+                            <option value="9:00 AM">9:00 AM</option>
+                            <option value="10:00 AM">10:00 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="12:00 PM">12:00 PM</option>
+                            <option value="1:00 PM">1:00 PM</option>
+                            <option value="2:00 PM">2:00 PM</option>
+                            <option value="3:00 PM">3:00 PM</option>
+                            <option value="4:00 PM">4:00 PM</option>
+                            <option value="5:00 PM">5:00 PM</option>
+                            <option value="6:00 PM">6:00 PM</option>
+                            <option value="7:00 PM">7:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px; margin-bottom: 15px; color: #1a1a1a;">Select Service *</h3>
+                <div class="services-grid">
+                    <div class="service-card" onclick="selectService(this, 'Haircut', '30', '2000')">
+                        <i class="fas fa-scissors" style="font-size: 2rem; color: #D4AF37; margin-bottom: 10px;"></i>
+                        <h4>Haircut</h4>
+                        <p>30 minutes</p>
+                        <div class="price">₦2,000</div>
+                    </div>
+
+                    <div class="service-card" onclick="selectService(this, 'Haircut & Beard', '40', '3000')">
+                        <i class="fas fa-cut" style="font-size: 2rem; color: #D4AF37; margin-bottom: 10px;"></i>
+                        <h4>Haircut & Beard</h4>
+                        <p>40 minutes</p>
+                        <div class="price">₦3,000</div>
+                    </div>
+
+                    <div class="service-card" onclick="selectService(this, 'Kids Haircut', '40', '2500')">
+                        <i class="fas fa-child" style="font-size: 2rem; color: #D4AF37; margin-bottom: 10px;"></i>
+                        <h4>Kids Haircut</h4>
+                        <p>40 minutes</p>
+                        <div class="price">₦2,500</div>
+                    </div>
+
+                    <div class="service-card" onclick="selectService(this, 'Shaving', '15', '1000')">
+                        <i class="fas fa-star" style="font-size: 2rem; color: #D4AF37; margin-bottom: 10px;"></i>
+                        <h4>Shaving</h4>
+                        <p>15 minutes</p>
+                        <div class="price">₦1,000</div>
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 20px;">
+                    <label for="notes">Special Requests (Optional)</label>
+                    <input type="text" id="notes" placeholder="Any special instructions?">
+                </div>
+
+                <button class="book-btn" onclick="bookAppointment()">
+                    <i class="fas fa-check"></i> Confirm Booking
+                </button>
+            </div>
+        </div>
+
+        <!-- My Bookings Tab -->
+        <div id="bookings" class="tab-content">
+            <div class="booking-section">
+                <h2>My Appointments</h2>
+                <div class="bookings-list" id="bookingsList">
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>No bookings yet. <a href="#" onclick="switchTab('book')" style="color: #D4AF37;">Book now!</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Tab -->
+        <div id="profile" class="tab-content">
+            <div class="booking-section">
+                <h2>My Profile</h2>
+                <div id="profileInfo"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if customer is logged in
+        function checkCustomerAccess() {
+            if (localStorage.getItem('customerLoggedIn') !== 'true') {
+                window.location.href = 'customer-login.html';
+                return false;
+            }
+            return true;
+        }
+
+        // Initialize
+        if (checkCustomerAccess()) {
+            loadCustomerInfo();
+            loadMyBookings();
+        }
+
+        let selectedService = null;
+
+        function loadCustomerInfo() {
+            const customerName = localStorage.getItem('currentCustomerName');
+            document.getElementById('customerName').textContent = customerName;
+            
+            const customerId = localStorage.getItem('currentCustomerId');
+            const customers = JSON.parse(localStorage.getItem('customers')) || [];
+            const customer = customers.find(c => c.id === customerId);
+
+            if (customer) {
+                const profileHtml = `
+                    <div style="display: grid; gap: 15px;">
+                        <div class="booking-detail">
+                            <strong>Full Name:</strong>
+                            <span>${customer.fullName}</span>
+                        </div>
+                        <div class="booking-detail">
+                            <strong>Username:</strong>
+                            <span>${customer.username}</span>
+                        </div>
+                        <div class="booking-detail">
+                            <strong>Email:</strong>
+                            <span>${customer.email}</span>
+                        </div>
+                        <div class="booking-detail">
+                            <strong>Phone:</strong>
+                            <span>${customer.phone}</span>
+                        </div>
+                        <div class="booking-detail">
+                            <strong>Member Since:</strong>
+                            <span>${new Date(customer.createdAt).toLocaleDateString()}</span>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('profileInfo').innerHTML = profileHtml;
+            }
+        }
+
+        function selectService(element, name, duration, price) {
+            // Remove previous selection
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+
+            // Add selection to clicked card
+            element.classList.add('selected');
+
+            // Store selected service
+            selectedService = { name, duration, price };
+        }
+
+        function bookAppointment() {
+            const location = document.getElementById('location').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const notes = document.getElementById('notes').value;
+
+            if (!selectedService) {
+                showMessage('Please select a service', 'error');
+                return;
+            }
+
+            if (!location) {
+                showMessage('Please select a location', 'error');
+                return;
+            }
+
+            if (!date) {
+                showMessage('Please select a date', 'error');
+                return;
+            }
+
+            if (!time) {
+                showMessage('Please select a time', 'error');
+                return;
+            }
+
+            // Create booking
+            const bookingRef = 'OC' + Date.now().toString().slice(-8);
+            const [locationName, address] = location.split('|');
+
+            const booking = {
+                reference: bookingRef,
+                customerId: localStorage.getItem('currentCustomerId'),
+                customerName: localStorage.getItem('currentCustomerName'),
+                serviceName: selectedService.name,
+                duration: selectedService.duration,
+                price: selectedService.price,
+                locationName: locationName,
+                address: address,
+                date: date,
+                time: time,
+                notes: notes,
+                bookedAt: new Date().toISOString(),
+                status: 'Pending'
+            };
+
+            // Save to customer bookings
+            let allBookings = JSON.parse(localStorage.getItem('allBookings')) || [];
+            allBookings.push(booking);
+            localStorage.setItem('allBookings', JSON.stringify(allBookings));
+
+            showMessage(`Booking confirmed! Reference: ${bookingRef}`, 'success');
+
+            // Clear form
+            setTimeout(() => {
+                document.getElementById('location').value = '';
+                document.getElementById('date').value = '';
+                document.getElementById('time').value = '';
+                document.getElementById('notes').value = '';
+                document.querySelectorAll('.service-card').forEach(card => card.classList.remove('selected'));
+                selectedService = null;
+                loadMyBookings();
+                switchTab('bookings');
+            }, 2000);
+        }
+
+        function loadMyBookings() {
+            const customerId = localStorage.getItem('currentCustomerId');
+            const allBookings = JSON.parse(localStorage.getItem('allBookings')) || [];
+            const myBookings = allBookings.filter(b => b.customerId === customerId);
+
+            const bookingsList = document.getElementById('bookingsList');
+
+            if (myBookings.length === 0) {
+                bookingsList.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <p>No bookings yet. <a href="#" onclick="switchTab('book')" style="color: #D4AF37;">Book now!</a></p>
+                    </div>
+                `;
+                return;
+            }
+
+            bookingsList.innerHTML = myBookings.map(booking => `
+                <div class="booking-card">
+                    <h4>
+                        ${booking.serviceName}
+                        <span class="booking-ref">${booking.reference}</span>
+                    </h4>
+                    <div class="booking-detail">
+                        <strong>Date:</strong>
+                        <span>${new Date(booking.date).toLocaleDateString()}</span>
+                    </div>
+                    <div class="booking-detail">
+                        <strong>Time:</strong>
+                        <span>${booking.time}</span>
+                    </div>
+                    <div class="booking-detail">
+                        <strong>Location:</strong>
+                        <span>${booking.locationName}</span>
+                    </div>
+                    <div class="booking-detail">
+                        <strong>Duration:</strong>
+                        <span>${booking.duration} minutes</span>
+                    </div>
+                    <div class="booking-detail">
+                        <strong>Price:</strong>
+                        <span>₦${parseInt(booking.price).toLocaleString()}</span>
+                    </div>
+                    <span class="status-badge status-${booking.status.toLowerCase()}">
+                        ${booking.status}
+                    </span>
+                </div>
+            `).join('');
+        }
+
+        function switchTab(tab) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tab).classList.add('active');
+
+            // Mark button as active
+            event.target.classList.add('active');
+
+            if (tab === 'bookings') {
+                loadMyBookings();
+            }
+        }
+
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('bookMessage');
+            messageDiv.textContent = message;
+            messageDiv.className = 'message ' + type;
+
+            setTimeout(() => {
+                messageDiv.className = '';
+                messageDiv.textContent = '';
+            }, 3000);
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('customerLoggedIn');
+                localStorage.removeItem('currentCustomerId');
+                localStorage.removeItem('currentCustomerName');
+                localStorage.removeItem('currentCustomerUsername');
+                window.location.href = 'customer-login.html';
+            }
+        }
+    </script>
+</body>
+</html>

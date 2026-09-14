@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ola's Cutz Barbershop - Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header/Navbar */
+        .navbar {
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #D4AF37;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            background: #D4AF37;
+            color: white;
+        }
+
+        /* Main Content */
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content {
+            text-align: center;
+            color: white;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #D4AF37;
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            color: #ddd;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .option-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .option-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .option-card i {
+            font-size: 3rem;
+            color: #D4AF37;
+            margin-bottom: 20px;
+        }
+
+        .option-card h3 {
+            color: #1a1a1a;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        .option-card p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #D4AF37;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background: #B8941E;
+            transform: translateY(-2px);
+        }
+
+        .guest-option {
+            background: rgba(212, 175, 55, 0.2);
+            border: 2px solid #D4AF37;
+        }
+
+        /* Footer */
+        .footer {
+            background: rgba(0, 0, 0, 0.9);
+            color: #999;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px;
+            border-radius: 12px;
+        }
+
+        .feature {
+            text-align: center;
+            color: white;
+        }
+
+        .feature i {
+            font-size: 2rem;
+            color: #D4AF37;
+            margin-bottom: 10px;
+        }
+
+        .feature h4 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .feature p {
+            font-size: 0.85rem;
+            color: #bbb;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .content h1 {
+                font-size: 2rem;
+            }
+
+            .content p {
+                font-size: 1rem;
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .option-card {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="navbar">
+        <div class="logo">
+            <i class="fas fa-cut"></i>
+            <span>Ola's Cutz</span>
+        </div>
+        <div class="nav-links">
+            <a href="#customer" onclick="document.querySelector('.options-grid').scrollIntoView({behavior: 'smooth'})">
+                Book Now
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="content">
+            <h1>✂️ Welcome to Ola's Cutz</h1>
+            <p>Professional Barbershop in Lagos & Ilorin</p>
+
+            <div class="options-grid" id="customer">
+                <!-- New Customer Option -->
+                <div class="option-card">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>New Customer</h3>
+                    <p>Create your personal account and start booking appointments immediately. Manage your profile and view your booking history.</p>
+                    <a href="customer-register.html" class="btn">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </a>
+                </div>
+
+                <!-- Existing Customer Option -->
+                <div class="option-card">
+                    <i class="fas fa-sign-in-alt"></i>
+                    <h3>Existing Customer</h3>
+                    <p>Already have an account? Login with your username and password to book your next appointment.</p>
+                    <a href="customer-login.html" class="btn">
+                        <i class="fas fa-sign-in-alt"></i> Login to Your Account
+                    </a>
+                </div>
+
+                <!-- Admin Option -->
+                <div class="option-card">
+                    <i class="fas fa-lock"></i>
+                    <h3>Admin</h3>
+                    <p>Manage all bookings, view customer appointments, and control your barbershop operations.</p>
+                    <a href="admin-login.html" class="btn">
+                        <i class="fas fa-sign-in-alt"></i> Admin Login
+                    </a>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="features">
+                <div class="feature">
+                    <i class="fas fa-calendar-check"></i>
+                    <h4>Easy Booking</h4>
+                    <p>Quick and simple appointment booking</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h4>Two Locations</h4>
+                    <p>Lagos & Ilorin branches</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-images"></i>
+                    <h4>Style Gallery</h4>
+                    <p>Browse 18+ hairstyle options</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user-circle"></i>
+                    <h4>Track Bookings</h4>
+                    <p>Manage your appointments</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>&copy; 2024 Ola's Cutz Barbershop. All rights reserved.</p>
+        <p>Phone: +234 701 603 7881 | Email: hormola25@gmail.com</p>
+    </div>
+</body>
+</html>

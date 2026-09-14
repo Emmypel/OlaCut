@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ola's Cutz - Customer Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 400px;
+            animation: slideUp 0.6s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .header i {
+            font-size: 4rem;
+            color: #D4AF37;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            color: #1a1a1a;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .success-banner {
+            background: #efe;
+            color: #3c3;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            border-left: 4px solid #3c3;
+        }
+
+        .success-banner.show {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+
+        .error-message {
+            background: #fee;
+            color: #c33;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+            border-left: 4px solid #c33;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: #D4AF37;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            background: #B8941E;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            text-align: center;
+            color: #999;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+
+        .footer-links a {
+            color: #D4AF37;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 0 5px;
+            transition: all 0.3s ease;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .footer-links a:hover {
+            color: #B8941E;
+        }
+
+        .other-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .other-links a {
+            display: inline;
+            margin-bottom: 0;
+        }
+
+        .user-type-info {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .user-type-info strong {
+            color: #1a1a1a;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .header i {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <i class="fas fa-cut"></i>
+            <h1>Ola's Cutz</h1>
+            <p>Customer Login</p>
+        </div>
+
+        <div class="success-banner" id="successBanner">
+            <i class="fas fa-check-circle"></i> Account created! Welcome! Please login.
+        </div>
+
+        <div class="error-message" id="errorMessage"></div>
+
+        <form onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="username">
+                    <i class="fas fa-user"></i> Username
+                </label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">
+                    <i class="fas fa-lock"></i> Password
+                </label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="login-btn">
+                <i class="fas fa-sign-in-alt"></i> Login
+            </button>
+        </form>
+
+        <div class="divider">
+            Don't have an account yet?
+        </div>
+
+        <div class="footer-links">
+            <a href="customer-register.html">
+                <i class="fas fa-user-plus"></i> Create New Account
+            </a>
+        </div>
+
+        <div class="other-links">
+            <a href="index.html">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <span style="color: #ddd;">|</span>
+            <a href="admin-login.html">
+                <i class="fas fa-lock"></i> Admin
+            </a>
+        </div>
+
+        <div class="user-type-info">
+            <strong>ℹ️ User Type Info:</strong>
+            Customers: Use your registered username & password<br>
+            <br>
+            <a href="admin-login.html" style="color: #D4AF37;">→ Are you an Admin? Login here</a>
+        </div>
+    </div>
+
+    <script>
+        // Show success banner if redirected from registration
+        if (localStorage.getItem('registerSuccess') === 'true') {
+            document.getElementById('successBanner').classList.add('show');
+            localStorage.removeItem('registerSuccess');
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const errorDiv = document.getElementById('errorMessage');
+
+            errorDiv.classList.remove('show');
+
+            // Get all customers
+            const customers = JSON.parse(localStorage.getItem('customers')) || [];
+
+            // Find matching customer
+            const customer = customers.find(c => c.username === username && c.password === password);
+
+            if (!customer) {
+                errorDiv.textContent = 'Invalid username or password';
+                errorDiv.classList.add('show');
+                return;
+            }
+
+            // Login successful
+            localStorage.setItem('customerLoggedIn', 'true');
+            localStorage.setItem('currentCustomerId', customer.id);
+            localStorage.setItem('currentCustomerName', customer.fullName);
+            localStorage.setItem('currentCustomerUsername', customer.username);
+            localStorage.setItem('loginTime', new Date().toISOString());
+
+            // Redirect to customer dashboard
+            window.location.href = 'customer-dashboard.html';
+        }
+
+        // Check if already logged in
+        if (localStorage.getItem('customerLoggedIn') === 'true') {
+            window.location.href = 'customer-dashboard.html';
+        }
+    </script>
+</body>
+</html>

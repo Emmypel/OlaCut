@@ -342,9 +342,22 @@ function confirmBooking() {
     // Generate booking reference
     const bookingRef = 'OC' + Date.now().toString().slice(-8);
     
-    // Create booking object
+    // Get logged-in customer info
+    const customerId = localStorage.getItem('currentCustomerId');
+    const customerName = localStorage.getItem('currentCustomerName');
+    
+    // Check if customer is logged in
+    if (!customerId || !customerName) {
+        alert('You must be logged in to book an appointment!\nRedirecting to login...');
+        window.location.href = 'customer-login.html';
+        return;
+    }
+    
+    // Create booking object (now includes customer info)
     const newBooking = {
         reference: bookingRef,
+        customerId: customerId,           // Link to customer
+        customerName: customerName,       // Customer's name
         ...bookingData,
         bookedAt: new Date().toISOString(),
         status: 'Pending' // Status: Pending, Confirmed, Completed, Cancelled

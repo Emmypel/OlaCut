@@ -8,6 +8,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <script>
+        // ===== CHECK IF CUSTOMER IS LOGGED IN =====
+        // This must run BEFORE the page loads
+        
+        // Check if customer is logged in
+        if (localStorage.getItem('customerLoggedIn') !== 'true') {
+            // Not logged in - redirect to login page
+            window.location.href = 'customer-login.html';
+        }
+    </script>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="container">
@@ -22,6 +32,12 @@
                     <a href="#gallery" class="nav-link">Gallery</a>
                     <a href="#booking" class="nav-link">Book Now</a>
                     <a href="#contact" class="nav-link">Contact</a>
+                    <span class="nav-user" id="navUser" style="color: #D4AF37; font-weight: 600;">
+                        <i class="fas fa-user-circle"></i> <span id="userName">Customer</span>
+                    </span>
+                    <button class="nav-link" onclick="logoutCustomer()" style="background: none; border: none; color: inherit; cursor: pointer;">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
                 </div>
                 <button class="mobile-toggle" id="mobileToggle">
                     <span></span>
@@ -469,5 +485,44 @@
     <script src="booking.js"></script>
     <script src="gallery.js"></script>
     <script src="main.js"></script>
+
+    <script>
+        // ===== LOAD CUSTOMER INFO =====
+        function loadCustomerInfo() {
+            const customerName = localStorage.getItem('currentCustomerName');
+            if (customerName) {
+                document.getElementById('userName').textContent = customerName;
+                // Pre-fill customer name in booking form
+                document.getElementById('customerName').value = customerName;
+            }
+            
+            // Get customer's email and phone from their account
+            const customerId = localStorage.getItem('currentCustomerId');
+            if (customerId) {
+                const customers = JSON.parse(localStorage.getItem('customers')) || [];
+                const customer = customers.find(c => c.id === customerId);
+                
+                if (customer) {
+                    // Pre-fill phone and email
+                    document.getElementById('customerPhone').value = customer.phone || '';
+                    document.getElementById('customerEmail').value = customer.email || '';
+                }
+            }
+        }
+
+        // Load customer info when page loads
+        document.addEventListener('DOMContentLoaded', loadCustomerInfo);
+
+        // ===== LOGOUT FUNCTION =====
+        function logoutCustomer() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('customerLoggedIn');
+                localStorage.removeItem('currentCustomerId');
+                localStorage.removeItem('currentCustomerName');
+                localStorage.removeItem('currentCustomerUsername');
+                window.location.href = 'customer-login.html';
+            }
+        }
+    </script>
 </body>
 </html>
